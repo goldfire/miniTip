@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.5
+ * miniTip v0.5.5
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -59,7 +59,8 @@
                 var delay = false;
                 
                 // define variable that checks if the mouse is still on the tooltip
-                var hov = false;
+                var tHov = false;
+                var aHov = true;
                 
                 // if you are using the title attribute, remove it from the anchor
                 if (!o.content) {
@@ -69,9 +70,11 @@
                 // add the hover event
                 el.hover(
                     function(){
+                    	aHov = true;
                         show();
                     },
                     function(){
+                    	aHov = false;
                         hide();
                     }
                 );
@@ -80,11 +83,11 @@
                 if (!o.aHide) {
                     tt_w.hover(
                         function() {
-                    		hov = true;
+                    		tHov = true;
                     	},
                     	function() {
-                    		hov = false;
-                            window.setTimeout(function(){hide()}, 200);
+                    		tHov = false;
+                            window.setTimeout(function(){if (!aHov) hide()}, 200);
                     	}
                     );
                 }
@@ -183,7 +186,7 @@
 
                 // hide the tooltip
                 function hide() {
-                    if (!o.aHide && !hov || o.aHide) {
+                    if (!o.aHide && !tHov || o.aHide) {
                         // clear delay timer if exists
                         if (delay) clearTimeout(delay);
                         
@@ -194,7 +197,10 @@
                 
                 // make a second hide function if the tooltip is set to not auto hide
                 function hide2() {
-                    if (!o.aHide && !hov || o.aHide) tt_w.stop(true,true).fadeOut(o.fadeOut); else window.setTimeout(function(){hide()}, 200);
+                    if (!o.aHide && !tHov || o.aHide)
+                    	tt_w.stop(true,true).fadeOut(o.fadeOut);
+                    else
+                    	window.setTimeout(function(){hide()}, 200);
                 }
             }				
 		});
