@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.5.5
+ * miniTip v0.6
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -27,7 +27,9 @@
             fadeOut:    200,        // speed of fade out animation
             aHide:      true,      // set to false to only hide when the mouse moves away from the anchor and tooltip
             maxW:       '250px',    // max width of tooltip
-            offset:     5          // offset in pixels of stem from anchor
+            offset:     5,          // offset in pixels of stem from anchor
+            show: 		function(){}, // custom funciton to be called when the tooltip is shown
+		  	hide:	   	function(){} // custom funciton to be called when the tooltip is hidden
         };
         
         // merge the defaults with the user defined options
@@ -94,6 +96,9 @@
                 
                 // show the tooltip
                 function show() {
+                	// call the show callback function
+                	o.show.call(this);
+                	
                     // add in the content
                     tt_c.html(cont);
                     
@@ -197,9 +202,14 @@
                 
                 // make a second hide function if the tooltip is set to not auto hide
                 function hide2() {
-                    if (!o.aHide && !tHov || o.aHide)
+                	// if the mouse isn't on the tooltip or the anchor, hide it, otherwise loop back through
+                    if (!o.aHide && !tHov || o.aHide) {
+                    	// fade out the tooltip
                     	tt_w.stop(true,true).fadeOut(o.fadeOut);
-                    else
+                    	
+                    	// call the show callback function
+                		o.hide.call(this);
+                    } else
                     	window.setTimeout(function(){hide()}, 200);
                 }
             }				
