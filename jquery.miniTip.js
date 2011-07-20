@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.1
+ * miniTip v0.2
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -102,53 +102,84 @@
                     
                     // calculate position for tooltip
 					var mLeft = Math.round(left + w);
-					var mTop = Math.round(top + anchorH + o.offset);
+					var mTop = Math.round(top + anchorH + o.offset + 8);
                     
                     // position of the arrow
 					var aLeft = (Math.round(tipW - 16) / 2) - parseInt(tt_w.css('borderLeftWidth'));
                     
                     // figure out if the tooltip will go off of the screen
-                    var rightOut = (w + left) < parseInt($(window).scrollLeft());
-    				var leftOut = (tipW + left) > parseInt($(window).width());
-                    var topOut = (top + anchorH + o.offset + tipH + 8) > parseInt($(window).height() + $(window).scrollTop());
-        			var bottomOut = ((top + anchorH) - (o.offset + tipH + 8)) < 0;
+                    /*var rightOut = (w + left) < parseInt($(window).scrollLeft());
+        			var leftOut = (tipW + left) > parseInt($(window).width());
+                    var topOut = (top + anchorH + o.offset + tipH + 16) > parseInt($(window).height() + $(window).scrollTop());
+                    console.log(top + anchorH + o.offset + tipH + 16);
+                    console.log(parseInt($(window).height() + $(window).scrollTop()));
+        			var bottomOut = ((top + anchorH) - (o.offset + tipH + 16)) < 0;*/
+                    
+                    var rightOut = (left + anchorW + tipW + o.offset + 8) > parseInt($(window).width());
+                    var leftOut = (tipW + o.offset + 8) > left;
+                    var topOut = (tipH + o.offset + 8) > top;
+                    var bottomOut = (top + anchorH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop());
+                    console.log(rightOut, leftOut, topOut, bottomOut);
                     
                     // default anchor position
                     var anchorPos = o.anchor;
                     
                     // figure out where the anchor should be (left and right)
-                    if ((rightOut && w < 0) || (o.anchor == 'right' && !leftOut) || (o.anchor == 'left' && left < (tipW + o.offset + 5))) {
-    					anchorPos = 'right';
-						aTop = Math.round(tipH - 13) / 2;
+                    if (leftOut || o.anchor == 'right' && !rightOut) {
+        				anchorPos = 'right';
+						aTop = Math.round(tipH - 21) / 2;
 						aLeft = -12;
-						mLeft = Math.round(left + anchorW + o.offset);
+						mLeft = Math.round(left + anchorW + o.offset + 8);
+						mTop = Math.round(top + h);
+					} else if (rightOut || o.anchor == 'left' && !leftOut) {
+						anchorPos = 'left';
+						aTop = Math.round(tipH - 13) / 2;
+						aLeft =  Math.round(tipW);
+						mLeft = Math.round(left - (tipW + o.offset + 16));
+						mTop = Math.round(top + h + 8);
+					}
+                    /*if ((rightOut && w < 0) || (o.anchor == 'right' && !leftOut) || (o.anchor == 'left' && left < (tipW + o.offset + 5))) {
+    					anchorPos = 'right';
+						aTop = Math.round(tipH - 21) / 2;
+						aLeft = -12;
+						mLeft = Math.round(left + anchorW + o.offset + 8);
 						mTop = Math.round(top + h);
 					} else if ((leftOut && w < 0) || (o.anchor == 'left' && !rightOut)) {
 						anchorPos = 'left';
 						aTop = Math.round(tipH - 13) / 2;
 						aLeft =  Math.round(tipW);
-						mLeft = Math.round(left - (tipW + o.offset + 5));
-						mTop = Math.round(top + h);
-					}
+						mLeft = Math.round(left - (tipW + o.offset + 16));
+						mTop = Math.round(top + h + 8);
+					}*/
 					
                     // figure out where the anchor should be (top & bottom)
-					if (topOut || (o.anchor == 'bottom' && topOut) || (o.anchor == 'top' && !bottomOut)) {
-						if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'top';
-						aTop = tipH;
-						mTop = Math.round(top - (tipH + o.offset + 5));
+                    if (bottomOut || o.anchor == 'top' && !topOut) {
+                        if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'top';
+    					aTop = tipH - 4;
+						mTop = Math.round(top - (tipH + o.offset + 8));
+                    } else if (topOut || o.anchor == 'bottom' && !bottomOut) {
+                        if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'bottom';
+    					aTop = -12;					
+						mTop = Math.round(top + anchorH + o.offset + 8);
+                    }
+                    /*if (topOut || (o.anchor == 'bottom' && topOut) || (o.anchor == 'top' && !bottomOut)) {
+    					if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'top';
+						aTop = tipH - 4;
+						mTop = Math.round(top - (tipH + o.offset + 8));
 					} else if (bottomOut | (o.anchor == 'top' && bottomOut) || (o.anchor == 'bottom' && !topOut)) {
                         if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'bottom';
 						aTop = -12;					
-						mTop = Math.round(top + anchorH + o.offset);
-					}
-                    
-                    console.log(aTop, aLeft);
+						mTop = Math.round(top + anchorH + o.offset + 8);
+					}*/
                     
                     // position the arrow
                     tt_a.css({'margin-left': aLeft + 'px', 'margin-top': aTop + 'px'}).attr('class', anchorPos);
                     
                     // position the tooltip and show it
     				tt_w.css({"margin-left": mLeft+"px", "margin-top": mTop + 'px'}).stop(true,true).fadeIn(o.fadeIn);
+                    /////////////
+                    ///////////// ADD THE CODE THAT FOR DELAY
+                    /////////////
                 }
                 
                 // hide the tooltip
