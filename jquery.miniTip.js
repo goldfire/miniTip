@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.3
+ * miniTip v0.4
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -25,7 +25,7 @@
             anchor:     'top',      // top, right, bottom, left
             fadeIn:     200,        // speed of fade in animation
             fadeOut:    200,        // speed of fade out animation
-            aHide:      false,      // set to true to only hide when the mouse moves away from the anchor and tooltip
+            aHide:      true,      // set to false to only hide when the mouse moves away from the anchor and tooltip
             maxW:       '250px',    // max width of tooltip
             offset:     5          // offset in pixels of stem from anchor
         };
@@ -55,6 +55,9 @@
                 // make sure the anchor element can be referred to below
                 var el = $(this);
                 
+                // define the delay
+                var delay = false;
+                
                 // if you are using the title attribute, remove it from the anchor
                 if (!o.content) {
                     el.removeAttr('title');
@@ -78,8 +81,13 @@
                     // add in the content
                     tt_c.html(cont);
                     
-                    // insert the title
-                    tt_t.html(o.title);
+                    // insert the title (or hide if none is set)
+                    if (o.title != '') {
+                        tt_t.html(o.title);
+                        tt_t.show();
+                    } else {
+                        tt_t.hide();
+                    }
                     
                     // reset arrow position
                     tt_a.removeAttr('class');
@@ -120,8 +128,8 @@
                     if (leftOut || o.anchor == 'right' && !rightOut) {
                         if (o.anchor == 'left' || o.anchor == 'right') {
                             anchorPos = 'right';
-                            aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderLeftWidth')));
-    					    aLeft = -12;
+                            aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderRightWidth')));
+    					    aLeft = -8 - parseInt(tt_w.css('borderRightWidth'));
 						    mLeft = left + anchorW + o.offset + 8;
                             mTop = Math.round((top + anchorH / 2) - (tipH / 2));
                         }
@@ -139,13 +147,13 @@
                     if (bottomOut || o.anchor == 'top' && !topOut) {
                         if (o.anchor == 'top' || o.anchor == 'bottom') {
                             anchorPos = 'top';
-    					    aTop = tipH - 4;
+    					    aTop = tipH - parseInt(tt_w.css('borderTopWidth'));
 						    mTop = top - (tipH + o.offset + 8);
                         }
                     } else if (topOut || o.anchor == 'bottom' && !bottomOut) {
                         if (o.anchor == 'top' || o.anchor == 'bottom') {
                             anchorPos = 'bottom';
-    					    aTop = -12;					
+    					    aTop = -8 - parseInt(tt_w.css('borderBottomWidth'));					
 						    mTop = top + anchorH + o.offset + 8;
                         }
                     }
@@ -153,16 +161,20 @@
                     // position the arrow
                     tt_a.css({'margin-left': aLeft + 'px', 'margin-top': aTop + 'px'}).attr('class', anchorPos);
                     
+                    // clear delay timer if exists
+                    if (delay) clearTimeout(delay);
+                    
                     // position the tooltip and show it
-    				tt_w.css({"margin-left": mLeft+"px", "margin-top": mTop + 'px'}).stop(true,true).fadeIn(o.fadeIn);
-                    /////////////
-                    ///////////// ADD THE CODE THAT FOR DELAY
-                    /////////////
+    				delay = window.setTimeout(function(){ tt_w.css({"margin-left": mLeft+"px", "margin-top": mTop + 'px'}).stop(true,true).fadeIn(o.fadeIn); }, o.delay);
                 }
                 
                 // hide the tooltip
                 function hide() {
-                    console.log('hide');
+                    // clear delay timer if exists
+                    if (delay) clearTimeout(delay);
+                    
+                    // fade out the tooltip
+                    delay = window.setTimeout(function(){ tt_w.stop(true,true).fadeOut(o.fadeOut); }, o.delay);
                 }
             }				
 		});
