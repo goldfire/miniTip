@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.0.3
+ * miniTip v0.0.4
  *
  * Updated: July 19, 2011
  * Requires: jQuery v1.5+
@@ -31,5 +31,16 @@
         
         // merge the defaults with the user defined options
         var o = $.extend(d, opts);
+        
+        // add the tip elements to the DOM
+    	if ($("#miniTip").length <= 0) {
+			var tt_w = $('<div id="miniTip" style="max-width:'+o.maxW+';"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
+			$("body").append(tt_w);
+		} else {
+            var tt_w = $('#miniTip');
+    		var tt_t = $('#miniTip_t');
+			var tt_c = $('#miniTip_c');
+            var tt_a = $('#miniTip_a');
+		}
     }
 })(jQuery);
