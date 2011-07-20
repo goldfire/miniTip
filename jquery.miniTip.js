@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.4
+ * miniTip v0.5
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -58,6 +58,9 @@
                 // define the delay
                 var delay = false;
                 
+                // define variable that checks if the mouse is still on the tooltip
+                var hov = false;
+                
                 // if you are using the title attribute, remove it from the anchor
                 if (!o.content) {
                     el.removeAttr('title');
@@ -70,11 +73,21 @@
                     },
                     function(){
                         hide();
-                        /////////////
-                        ///////////// ADD THE CODE THAT KEEPS IT FROM HIDING IF AHIDE IS TRUE
-                        /////////////
                     }
                 );
+                
+                // add a hover event for the tooltip if aHide is false
+                if (!o.aHide) {
+                    tt_w.hover(
+                        function() {
+                    		hov = true;
+                    	},
+                    	function() {
+                    		hov = false;
+                            window.setTimeout(function(){hide()}, 200);
+                    	}
+                    );
+                }
                 
                 // show the tooltip
                 function show() {
@@ -167,14 +180,21 @@
                     // position the tooltip and show it
     				delay = window.setTimeout(function(){ tt_w.css({"margin-left": mLeft+"px", "margin-top": mTop + 'px'}).stop(true,true).fadeIn(o.fadeIn); }, o.delay);
                 }
-                
+
                 // hide the tooltip
                 function hide() {
-                    // clear delay timer if exists
-                    if (delay) clearTimeout(delay);
-                    
-                    // fade out the tooltip
-                    delay = window.setTimeout(function(){ tt_w.stop(true,true).fadeOut(o.fadeOut); }, o.delay);
+                    if (!o.aHide && !hov || o.aHide) {
+                        // clear delay timer if exists
+                        if (delay) clearTimeout(delay);
+                        
+                        // fade out the tooltip
+                        delay = window.setTimeout(function(){hide2()}, o.delay);
+                    }
+                }
+                
+                // make a second hide function if the tooltip is set to not auto hide
+                function hide2() {
+                    if (!o.aHide && !hov || o.aHide) tt_w.stop(true,true).fadeOut(o.fadeOut); else window.setTimeout(function(){hide()}, 200);
                 }
             }				
 		});
