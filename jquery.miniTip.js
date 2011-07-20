@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.6
+ * miniTip v0.6.5
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -23,6 +23,7 @@
             content:    false,      // the content of the tooltip
             delay:      300,        // how long to wait before showing and hiding the tooltip
             anchor:     'top',      // top, right, bottom, left
+            event:		'hover',	// can be 'hover' or 'click'
             fadeIn:     200,        // speed of fade in animation
             fadeOut:    200,        // speed of fade out animation
             aHide:      true,      // set to false to only hide when the mouse moves away from the anchor and tooltip
@@ -69,30 +70,41 @@
                     el.removeAttr('title');
                 }
                 
-                // add the hover event
-                el.hover(
-                    function(){
-                    	aHov = true;
-                        show();
-                    },
-                    function(){
-                    	aHov = false;
-                        hide();
-                    }
-                );
-                
-                // add a hover event for the tooltip if aHide is false
-                if (!o.aHide) {
-                    tt_w.hover(
-                        function() {
-                    		tHov = true;
-                    	},
-                    	function() {
-                    		tHov = false;
-                            window.setTimeout(function(){if (!aHov) hide()}, 200);
-                    	}
-                    );
-                }
+                if (o.event == 'hover') {
+	                // add the hover event
+	                el.hover(
+	                    function(){
+	                    	aHov = true;
+	                        show();
+	                    },
+	                    function(){
+	                    	aHov = false;
+	                        hide();
+	                    }
+	                );
+	                
+	                // add a hover event for the tooltip if aHide is false
+	                if (!o.aHide) {
+	                    tt_w.hover(
+	                        function() {
+	                    		tHov = true;
+	                    	},
+	                    	function() {
+	                    		tHov = false;
+	                            window.setTimeout(function(){if (!aHov) hide()}, 200);
+	                    	}
+	                    );
+	                }
+                } else if (o.event == 'click') {
+                	// make sure auto hide is set to false automatically
+                	o.aHide = true;
+                	
+                	// add the click event
+					el.click(function(){
+						show();
+						return false;
+					})
+				}
                 
                 // show the tooltip
                 function show() {
@@ -191,6 +203,7 @@
 
                 // hide the tooltip
                 function hide() {
+                	console.log('hide');
                     if (!o.aHide && !tHov || o.aHide) {
                         // clear delay timer if exists
                         if (delay) clearTimeout(delay);
@@ -202,6 +215,7 @@
                 
                 // make a second hide function if the tooltip is set to not auto hide
                 function hide2() {
+                	console.log('hide2');
                 	// if the mouse isn't on the tooltip or the anchor, hide it, otherwise loop back through
                     if (!o.aHide && !tHov || o.aHide) {
                     	// fade out the tooltip
