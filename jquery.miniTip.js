@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.2
+ * miniTip v0.3
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -34,9 +34,9 @@
         var o = $.extend(d, opts);
         
         // add the tip elements to the DOM
-    	if ($('#miniTip').length <= 0) {
-			var tt_w = $('<div id="miniTip" style="max-width:'+o.maxW+';"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
-			$('body').append(tt_w);
+        if ($('#miniTip').length <= 0) {
+			var tip = $('<div id="miniTip" style="max-width:'+o.maxW+';"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
+			$('body').append(tip);
 		}
         
         // define the containers
@@ -85,8 +85,8 @@
                     tt_a.removeAttr('class');
                     
                     // get position of anchor element
-                    var top = parseInt(el.offset()['top']);
-    				var left = parseInt(el.offset()['left']);
+                    var top = parseInt(el.offset().top);
+    				var left = parseInt(el.offset().left);
                     
                     // get width and height of the anchor
 					var anchorW = parseInt(el.outerWidth());
@@ -108,69 +108,47 @@
 					var aLeft = (Math.round(tipW - 16) / 2) - parseInt(tt_w.css('borderLeftWidth'));
                     
                     // figure out if the tooltip will go off of the screen
-                    /*var rightOut = (w + left) < parseInt($(window).scrollLeft());
-        			var leftOut = (tipW + left) > parseInt($(window).width());
-                    var topOut = (top + anchorH + o.offset + tipH + 16) > parseInt($(window).height() + $(window).scrollTop());
-                    console.log(top + anchorH + o.offset + tipH + 16);
-                    console.log(parseInt($(window).height() + $(window).scrollTop()));
-        			var bottomOut = ((top + anchorH) - (o.offset + tipH + 16)) < 0;*/
-                    
                     var rightOut = (left + anchorW + tipW + o.offset + 8) > parseInt($(window).width());
                     var leftOut = (tipW + o.offset + 8) > left;
                     var topOut = (tipH + o.offset + 8) > top;
                     var bottomOut = (top + anchorH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop());
-                    console.log(rightOut, leftOut, topOut, bottomOut);
                     
                     // default anchor position
                     var anchorPos = o.anchor;
                     
                     // figure out where the anchor should be (left and right)
                     if (leftOut || o.anchor == 'right' && !rightOut) {
-        				anchorPos = 'right';
-						aTop = Math.round(tipH - 21) / 2;
-						aLeft = -12;
-						mLeft = Math.round(left + anchorW + o.offset + 8);
-						mTop = Math.round(top + h);
-					} else if (rightOut || o.anchor == 'left' && !leftOut) {
-						anchorPos = 'left';
-						aTop = Math.round(tipH - 13) / 2;
-						aLeft =  Math.round(tipW);
-						mLeft = Math.round(left - (tipW + o.offset + 16));
-						mTop = Math.round(top + h + 8);
-					}
-                    /*if ((rightOut && w < 0) || (o.anchor == 'right' && !leftOut) || (o.anchor == 'left' && left < (tipW + o.offset + 5))) {
-    					anchorPos = 'right';
-						aTop = Math.round(tipH - 21) / 2;
-						aLeft = -12;
-						mLeft = Math.round(left + anchorW + o.offset + 8);
-						mTop = Math.round(top + h);
-					} else if ((leftOut && w < 0) || (o.anchor == 'left' && !rightOut)) {
-						anchorPos = 'left';
-						aTop = Math.round(tipH - 13) / 2;
-						aLeft =  Math.round(tipW);
-						mLeft = Math.round(left - (tipW + o.offset + 16));
-						mTop = Math.round(top + h + 8);
-					}*/
+                        if (o.anchor == 'left' || o.anchor == 'right') {
+                            anchorPos = 'right';
+                            aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderLeftWidth')));
+    					    aLeft = -12;
+						    mLeft = left + anchorW + o.offset + 8;
+                            mTop = Math.round((top + anchorH / 2) - (tipH / 2));
+                        }
+                    } else if (rightOut || o.anchor == 'left' && !leftOut) {
+                        if (o.anchor == 'left' || o.anchor == 'right') {
+                            anchorPos = 'left';
+                            aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderLeftWidth')));
+        				    aLeft = tipW - parseInt(tt_w.css('borderLeftWidth'));
+						    mLeft = left - tipW - o.offset - 8;
+                            mTop = Math.round((top + anchorH / 2) - (tipH / 2));
+                        }
+                    }
 					
                     // figure out where the anchor should be (top & bottom)
                     if (bottomOut || o.anchor == 'top' && !topOut) {
-                        if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'top';
-    					aTop = tipH - 4;
-						mTop = Math.round(top - (tipH + o.offset + 8));
+                        if (o.anchor == 'top' || o.anchor == 'bottom') {
+                            anchorPos = 'top';
+    					    aTop = tipH - 4;
+						    mTop = top - (tipH + o.offset + 8);
+                        }
                     } else if (topOut || o.anchor == 'bottom' && !bottomOut) {
-                        if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'bottom';
-    					aTop = -12;					
-						mTop = Math.round(top + anchorH + o.offset + 8);
+                        if (o.anchor == 'top' || o.anchor == 'bottom') {
+                            anchorPos = 'bottom';
+    					    aTop = -12;					
+						    mTop = top + anchorH + o.offset + 8;
+                        }
                     }
-                    /*if (topOut || (o.anchor == 'bottom' && topOut) || (o.anchor == 'top' && !bottomOut)) {
-    					if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'top';
-						aTop = tipH - 4;
-						mTop = Math.round(top - (tipH + o.offset + 8));
-					} else if (bottomOut | (o.anchor == 'top' && bottomOut) || (o.anchor == 'bottom' && !topOut)) {
-                        if (o.anchor == 'top' || o.anchor == 'bottom') anchorPos = 'bottom';
-						aTop = -12;					
-						mTop = Math.round(top + anchorH + o.offset + 8);
-					}*/
                     
                     // position the arrow
                     tt_a.css({'margin-left': aLeft + 'px', 'margin-top': aTop + 'px'}).attr('class', anchorPos);
