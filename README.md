@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v0.8.5)
+jQuery miniTip Plugin (v1.0)
 ---------------------
 
 License
@@ -13,7 +13,7 @@ http://goldfirestudios.com
 
 Description
 ===========
-[miniTip](http://goldfirestudios.com/blog/) is an ultra lightweight jQuery plugin that creates highly customizable tooltips without all of the fluff.
+[miniTip](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin) is an ultra lightweight jQuery plugin that creates highly customizable tooltips without all of the fluff.
 
 ### Features  ###
 
@@ -29,11 +29,11 @@ Description
 * Support for hover and click events
 * Optional title bar
 * Tested in: IE7+, Firefox 3.5+, Safari 3+, Chrome, Opera 10+
-* More features can be found at the [miniTip](http://goldfirestudios.com/blog/1) home page
+* More features can be found at the [miniTip](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin) home page
 
 ### Documentation ###
 
-Please go to the [miniTip](http://goldfirestudios.com/blog/) home page to view the full documentation (it is really straightforward, I promise!).
+Please go to the [miniTip](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin) home page to view the full documentation (it is really straightforward, I promise!).
 
 Examples
 ========
@@ -58,7 +58,7 @@ This is a more advanced example utilizing all available options (as of v1.0). Th
       hide: funciton(){ alert('World!'); }
     });
 
-More examples and live demos can be found at [http://goldfirestudios.com/blog/](http://goldfirestudios.com/blog/)
+More examples and live demos can be found at [http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin)
 
 Requirements
 ============

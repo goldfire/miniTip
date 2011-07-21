@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.8.5
+ * miniTip v1.0
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.3+
@@ -10,7 +10,7 @@
  * Dual licensed under the MIT and GPL
  *
  * Documentation found at:
- * http://goldfirestudios.com/blog/
+ * http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin
 */
 
 (function($){
