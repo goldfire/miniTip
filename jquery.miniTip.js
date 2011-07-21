@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.8
+ * miniTip v0.8.5
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.3+
@@ -15,7 +15,7 @@
 
 (function($){
     $.fn.miniTip = function(opts) {
-		// define the default option values
+    	// define the default option values
 		var d = {
 			title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
@@ -112,8 +112,8 @@
 					});
 					
 					// clear the tooltip if anywhere but the tooltip itself is clicked
-					$('body').click(function(e){
-						if ($.inArray(e.target.id, ['miniTip', 'miniTip_c', 'miniTip_a', 'miniTip_t']) < 0) hide();
+					$('html').click(function(e){
+						if (tt_w.css('display') == 'block' && $.inArray(e.target.id, ['miniTip', 'miniTip_c', 'miniTip_a', 'miniTip_t']) < 0) hide();
 					});
 				}
 				
@@ -166,12 +166,12 @@
 					var sOut = (top + elH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop());
 					
 					// default anchor position
-					var anchorPos = o.anchor;
+					var elPos = o.anchor;
 					
 					// calculate where the anchor should be (east & west)
 					if (wOut || o.anchor == 'e' && !eOut) {
 						if (o.anchor == 'w' || o.anchor == 'e') {
-							anchorPos = 'e';
+							elPos = 'e';
 							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderRightWidth')));
 							aLeft = -8 - parseInt(tt_w.css('borderRightWidth'));
 							mLeft = left + elW + o.offset + 8;
@@ -179,7 +179,7 @@
 						}
 					} else if (eOut || o.anchor == 'w' && !wOut) {
 						if (o.anchor == 'w' || o.anchor == 'e') {
-							anchorPos = 'w';
+							elPos = 'w';
 							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderLeftWidth')));
 							aLeft = tipW - parseInt(tt_w.css('borderLeftWidth'));
 							mLeft = left - tipW - o.offset - 8;
@@ -190,20 +190,20 @@
 					// calculate where the anchor should be (north & south)
 					if (sOut || o.anchor == 'n' && !nOut) {
 						if (o.anchor == 'n' || o.anchor == 's') {
-							anchorPos = 'n';
+							elPos = 'n';
 							aTop = tipH - parseInt(tt_w.css('borderTopWidth'));
 							mTop = top - (tipH + o.offset + 8);
 						}
 					} else if (nOut || o.anchor == 's' && !sOut) {
 						if (o.anchor == 'n' || o.anchor == 's') {
-							anchorPos = 's';
+							elPos = 's';
 							aTop = -8 - parseInt(tt_w.css('borderBottomWidth'));					
 							mTop = top + elH + o.offset + 8;
 						}
 					}
 					
 					// position the arrow
-					tt_a.css({'margin-left': aLeft + 'px', 'margin-top': aTop + 'px'}).attr('class', anchorPos);
+					tt_a.css({'margin-left': aLeft + 'px', 'margin-top': aTop + 'px'}).attr('class', elPos);
 					
 					// clear delay timer if exists
 					if (delay) clearTimeout(delay);
@@ -214,7 +214,6 @@
 		
 				// hide the tooltip
 				function hide() {
-					console.log(el.html());
 					if (!o.aHide && !tHov || o.aHide) {
 						// clear delay timer if exists
 						if (delay) clearTimeout(delay);
@@ -226,7 +225,6 @@
 				
 				// make a second hide function if the tooltip is set to not auto hide
 				function hide2() {
-					console.log('hide2');
 					// if the mouse isn't on the tooltip or the anchor, hide it, otherwise loop back through
 					if (!o.aHide && !tHov || o.aHide) {
 						// fade out the tooltip
