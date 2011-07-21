@@ -1,8 +1,8 @@
 /*!
- * miniTip v0.7.5
+ * miniTip v0.8
  *
  * Updated: July 20, 2011
- * Requires: jQuery v1.5+
+ * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
  * http://goldfirestudios.com
