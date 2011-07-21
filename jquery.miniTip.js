@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.7
+ * miniTip v0.7.5
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -20,7 +20,7 @@
 			title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
-			anchor:		'top', // top, right, bottom, left
+			anchor:		'n', // n (top), s (bottom), e (right), w (left)
 			event:		'hover', // can be 'hover' or 'click'
 			fadeIn:		200, // speed of fade in animation (ms)
 			fadeOut:	200, // speed of fade out animation (ms)
@@ -140,65 +140,65 @@
 					var top = parseInt(el.offset().top);
 					var left = parseInt(el.offset().left);
 					
-					// get width and height of the anchor
-					var anchorW = parseInt(el.outerWidth());
-					var anchorH = parseInt(el.outerHeight());
+					// get width and height of the anchor element
+					var elW = parseInt(el.outerWidth());
+					var elH = parseInt(el.outerHeight());
 					
 					// get width and height of the tooltip
 					var tipW = tt_w.outerWidth();
 					var tipH = tt_w.outerHeight();
 					
 					// calculate the difference between anchor and tooltip
-					var w = Math.round((anchorW - tipW) / 2);
-					var h = Math.round((anchorH - tipH) / 2);
+					var w = Math.round((elW - tipW) / 2);
+					var h = Math.round((elH - tipH) / 2);
 					
 					// calculate position for tooltip
 					var mLeft = Math.round(left + w);
-					var mTop = Math.round(top + anchorH + o.offset + 8);
+					var mTop = Math.round(top + elH + o.offset + 8);
 					
 					// position of the arrow
 					var aLeft = (Math.round(tipW - 16) / 2) - parseInt(tt_w.css('borderLeftWidth'));
 					
 					// figure out if the tooltip will go off of the screen
-					var rightOut = (left + anchorW + tipW + o.offset + 8) > parseInt($(window).width());
-					var leftOut = (tipW + o.offset + 8) > left;
-					var topOut = (tipH + o.offset + 8) > top;
-					var bottomOut = (top + anchorH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop());
+					var eOut = (left + elW + tipW + o.offset + 8) > parseInt($(window).width());
+					var wOut = (tipW + o.offset + 8) > left;
+					var nOut = (tipH + o.offset + 8) > top;
+					var sOut = (top + elH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop());
 					
 					// default anchor position
 					var anchorPos = o.anchor;
 					
-					// calculate where the anchor should be (left and right)
-					if (leftOut || o.anchor == 'right' && !rightOut) {
-						if (o.anchor == 'left' || o.anchor == 'right') {
-							anchorPos = 'right';
+					// calculate where the anchor should be (east & west)
+					if (wOut || o.anchor == 'e' && !eOut) {
+						if (o.anchor == 'w' || o.anchor == 'e') {
+							anchorPos = 'e';
 							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderRightWidth')));
 							aLeft = -8 - parseInt(tt_w.css('borderRightWidth'));
-							mLeft = left + anchorW + o.offset + 8;
-							mTop = Math.round((top + anchorH / 2) - (tipH / 2));
+							mLeft = left + elW + o.offset + 8;
+							mTop = Math.round((top + elH / 2) - (tipH / 2));
 						}
-					} else if (rightOut || o.anchor == 'left' && !leftOut) {
-						if (o.anchor == 'left' || o.anchor == 'right') {
-							anchorPos = 'left';
+					} else if (eOut || o.anchor == 'w' && !wOut) {
+						if (o.anchor == 'w' || o.anchor == 'e') {
+							anchorPos = 'w';
 							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderLeftWidth')));
 							aLeft = tipW - parseInt(tt_w.css('borderLeftWidth'));
 							mLeft = left - tipW - o.offset - 8;
-							mTop = Math.round((top + anchorH / 2) - (tipH / 2));
+							mTop = Math.round((top + elH / 2) - (tipH / 2));
 						}
 					}
 					
-					// calculate where the anchor should be (top & bottom)
-					if (bottomOut || o.anchor == 'top' && !topOut) {
-						if (o.anchor == 'top' || o.anchor == 'bottom') {
-							anchorPos = 'top';
+					// calculate where the anchor should be (north & south)
+					if (sOut || o.anchor == 'n' && !nOut) {
+						if (o.anchor == 'n' || o.anchor == 's') {
+							anchorPos = 'n';
 							aTop = tipH - parseInt(tt_w.css('borderTopWidth'));
 							mTop = top - (tipH + o.offset + 8);
 						}
-					} else if (topOut || o.anchor == 'bottom' && !bottomOut) {
-						if (o.anchor == 'top' || o.anchor == 'bottom') {
-							anchorPos = 'bottom';
+					} else if (nOut || o.anchor == 's' && !sOut) {
+						if (o.anchor == 'n' || o.anchor == 's') {
+							anchorPos = 's';
 							aTop = -8 - parseInt(tt_w.css('borderBottomWidth'));					
-							mTop = top + anchorH + o.offset + 8;
+							mTop = top + elH + o.offset + 8;
 						}
 					}
 					

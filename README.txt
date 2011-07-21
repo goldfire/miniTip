@@ -4,7 +4,7 @@ Copyright 2011 James Simpson
 
 http://goldfirestudios.com
 
-Version 0.7   -   Updated: July 20, 2011
+Version 0.7.5   -   Updated: July 20, 2011
 
 Description...
 

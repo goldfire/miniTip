@@ -1,4 +1,4 @@
-/* miniTip CSS - v0.7 */
+/* miniTip CSS - v0.7.5 */
 
 #miniTip {
     background-color: #262626;
@@ -32,28 +32,28 @@
 	left: 0;
 }
 
-#miniTip .top {
+#miniTip .n {
 	border-left: 8px solid transparent;
 	border-right: 8px solid transparent;
 	border-top: 8px solid #000;
 	border-bottom: 0;
 }
 
-#miniTip .bottom {
+#miniTip .s {
 	border-left: 8px solid transparent;
 	border-right: 8px solid transparent;
 	border-bottom: 8px solid #000;
 	border-top: 0;
 }
 
-#miniTip .right {
+#miniTip .e {
 	border-bottom: 8px solid transparent;
 	border-top: 8px solid transparent;
 	border-right: 8px solid #000;
 	border-left: 0;
 }
 
-#miniTip .left {
+#miniTip .w {
 	border-bottom: 8px solid transparent;
 	border-top: 8px solid transparent;
 	border-left: 8px solid #000;
