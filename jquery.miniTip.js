@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.6.6
+ * miniTip v0.6.7
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -17,18 +17,18 @@
     $.fn.miniTip = function(opts) {
 		// define the default option values
 		var d = {
-			title:		'',				// if left blank, no title bar will show
-			content:	false,			// the content of the tooltip
-			delay:		300,			// how long to wait before showing and hiding the tooltip (ms)
-			anchor:		'top',			// top, right, bottom, left
-			event:		'hover',		// can be 'hover' or 'click'
-			fadeIn:		200,			// speed of fade in animation (ms)
-			fadeOut:	200,			// speed of fade out animation (ms)
-			aHide:		true,			// set to false to only hide when the mouse moves away from the anchor and tooltip
-			maxW:		'250px',		// max width of tooltip
-			offset:		5,				// offset in pixels of stem from anchor
-			show:		function(){},	// custom funciton to be called when the tooltip is shown
-			hide:		function(){}	// custom funciton to be called when the tooltip is hidden
+			title:		'', // if left blank, no title bar will show
+			content:	false, // the content of the tooltip
+			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
+			anchor:		'top', // top, right, bottom, left
+			event:		'hover', // can be 'hover' or 'click'
+			fadeIn:		200, // speed of fade in animation (ms)
+			fadeOut:	200, // speed of fade out animation (ms)
+			aHide:		true, // set to false to only hide when the mouse moves away from the anchor and tooltip
+			maxW:		'250px', // max width of tooltip
+			offset:		5, // offset in pixels of stem from anchor
+			show:		function(){}, // custom funciton to be called when the tooltip is shown
+			hide:		function(){} // custom funciton to be called when the tooltip is hidden
 		};
 		
 		// merge the defaults with the user defined options
@@ -155,7 +155,7 @@
 					// default anchor position
 					var anchorPos = o.anchor;
 					
-					// figure out where the anchor should be (left and right)
+					// calculate where the anchor should be (left and right)
 					if (leftOut || o.anchor == 'right' && !rightOut) {
 						if (o.anchor == 'left' || o.anchor == 'right') {
 							anchorPos = 'right';
@@ -174,7 +174,7 @@
 						}
 					}
 					
-					// figure out where the anchor should be (top & bottom)
+					// calculate where the anchor should be (top & bottom)
 					if (bottomOut || o.anchor == 'top' && !topOut) {
 						if (o.anchor == 'top' || o.anchor == 'bottom') {
 							anchorPos = 'top';
