@@ -1,5 +1,5 @@
 /*!
- * miniTip v0.6.7
+ * miniTip v0.7
  *
  * Updated: July 20, 2011
  * Requires: jQuery v1.5+
@@ -72,6 +72,10 @@
 					// add the hover event
 					el.hover(
 						function(){
+							// make sure we know this wasn't activated by click
+							tt_w.removeAttr('click');
+							
+							// show the tooltip
 							aHov = true;
 							show();
 						},
@@ -89,7 +93,7 @@
 							},
 							function() {
 								tHov = false;
-								window.setTimeout(function(){if (!aHov) hide()}, 200);
+								window.setTimeout(function(){if (!aHov && !tt_w.attr('click')) hide()}, 200);
 							}
 						);
 					}
@@ -97,11 +101,20 @@
 					// make sure auto hide is set to false automatically
 					o.aHide = true;
 				
-					// add the click event
+					// add the click event to the anchor
 					el.click(function(){
-						show();
+						// make sure we know this was activated by click
+						tt_w.attr('click', 't');
+						
+						// show the tooltip, unless it is already showing, then close it
+						if (tt_w.css('display') == 'none') show(); else hide();
 						return false;
-					})
+					});
+					
+					// clear the tooltip if anywhere but the tooltip itself is clicked
+					$('body').click(function(e){
+						if ($.inArray(e.target.id, ['miniTip', 'miniTip_c', 'miniTip_a', 'miniTip_t']) < 0) hide();
+					});
 				}
 				
 				// show the tooltip
@@ -201,7 +214,7 @@
 		
 				// hide the tooltip
 				function hide() {
-					console.log('hide');
+					console.log(el.html());
 					if (!o.aHide && !tHov || o.aHide) {
 						// clear delay timer if exists
 						if (delay) clearTimeout(delay);
