@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.0)
+jQuery miniTip Plugin (v1.0.0)
 ---------------------
 
 License
