@@ -1,5 +1,5 @@
 /*!
- * miniTip v1.0.0
+ * miniTip v1.0.1
  *
  * Updated: July 21, 2011
  * Requires: jQuery v1.3+

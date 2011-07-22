@@ -1,4 +1,4 @@
-/*! miniTip CSS - v1.0.0 */
+/*! miniTip CSS - v1.0.1 */
 
 #miniTip {
     background-color: #f8f5ca;
@@ -12,6 +12,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+    z-index: 99999;
 }
 
 #miniTip_t {

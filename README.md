@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.0.0)
+jQuery miniTip Plugin (v1.0.1)
 ---------------------
 
 License
@@ -63,3 +63,11 @@ More examples and live demos can be found at [http://goldfirestudios.com/blog/81
 Requirements
 ============
 * jQuery v1.3+
+
+Changelog
+============
+### Version 1.0.1 (July 21, 2011) ###
+* Added fix for z-index issues in select cases.
+
+### Version 1.0.0 (July 21, 2011) ###
+* Initial release.
