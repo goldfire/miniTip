@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.0.1)
+jQuery miniTip Plugin (v1.1.0)
 ---------------------
 
 License
@@ -66,6 +66,12 @@ Requirements
 
 Changelog
 ============
+### Version 1.1.0 (July 22, 2011) ###
+* Automatic repositioning of the tooltip anchor point now works correctly on page scroll.
+* Bug fixed that caused odd behavior when the anchor was flush to the right of the screen.
+* Correctly declare aTop variable.
+* Improved commenting on CSS file.
+
 ### Version 1.0.1 (July 21, 2011) ###
 * Added fix for z-index issues in select cases.
 

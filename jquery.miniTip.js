@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.0.1
+ * miniTip v1.1.0
  *
- * Updated: July 21, 2011
+ * Updated: July 22, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -15,7 +15,7 @@
 
 (function($){
     $.fn.miniTip = function(opts) {
-    	// define the default option values
+        // declare the default option values
 		var d = {
 			title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
@@ -31,7 +31,7 @@
 			hide:		function(){} // custom funciton to be called when the tooltip is hidden
 		};
 		
-		// merge the defaults with the user defined options
+		// merge the defaults with the user declared options
 		var o = $.extend(d, opts);
 		
 		// add the tip elements to the DOM
@@ -40,7 +40,7 @@
 			$('body').append(tip);
 		}
 		
-		// define the containers
+		// declare the containers
 		var tt_w = $('#miniTip');
 		var tt_t = $('#miniTip_t');
 		var tt_c = $('#miniTip_c');
@@ -56,10 +56,10 @@
 				// make sure the anchor element can be referred to below
 				var el = $(this);
 				
-				// define the delay
+				// declare the delay variable
 				var delay = false;
 				
-				// define variable that checks if the mouse is still on the tooltip
+				// declare variable that checks if the mouse is still on the tooltip
 				var tHov = false;
 				var aHov = true;
 				
@@ -136,6 +136,9 @@
 					// reset arrow position
 					tt_a.removeAttr('class');
 					
+					// make sure the tooltip is the right width even if the anchor is flush to the right of the screen
+					tt_w.width(tt_w.width());
+					
 					// get position of anchor element
 					var top = parseInt(el.offset().top);
 					var left = parseInt(el.offset().left);
@@ -158,16 +161,17 @@
 					
 					// position of the arrow
 					var aLeft = (Math.round(tipW - 16) / 2) - parseInt(tt_w.css('borderLeftWidth'));
+					var aTop = 0;
 					
 					// figure out if the tooltip will go off of the screen
 					var eOut = (left + elW + tipW + o.offset + 8) > parseInt($(window).width());
 					var wOut = (tipW + o.offset + 8) > left;
-					var nOut = (tipH + o.offset + 8) > top;
+					var nOut = (tipH + o.offset + 8) > top - $(window).scrollTop();
 					var sOut = (top + elH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop());
 					
 					// default anchor position
 					var elPos = o.anchor;
-					
+
 					// calculate where the anchor should be (east & west)
 					if (wOut || o.anchor == 'e' && !eOut) {
 						if (o.anchor == 'w' || o.anchor == 'e') {
