@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.1.0
+ * miniTip v1.2.0
  *
- * Updated: July 22, 2011
+ * Updated: July 23, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -16,7 +16,7 @@
 (function($){
     $.fn.miniTip = function(opts) {
         // declare the default option values
-		var d = {
+    	var d = {
 			title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
@@ -26,47 +26,40 @@
 			fadeOut:	200, // speed of fade out animation (ms)
 			aHide:		true, // set to false to only hide when the mouse moves away from the anchor and tooltip
 			maxW:		'250px', // max width of tooltip
-			offset:		5, // offset in pixels of stem from anchor
-			show:		function(){}, // custom funciton to be called when the tooltip is shown
-			hide:		function(){} // custom funciton to be called when the tooltip is hidden
-		};
+			offset:		5 // offset in pixels of stem from anchor
+		},
 		
-		// merge the defaults with the user declared options
-		var o = $.extend(d, opts);
+			// merge the defaults with the user declared options
+			o = $.extend(d, opts);
 		
 		// add the tip elements to the DOM
-		if ($('#miniTip').length <= 0) {
-			var tip = $('<div id="miniTip" style="max-width:'+o.maxW+';"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
-			$('body').append(tip);
-		}
+		if ($('#miniTip').length <= 0)
+			$('body').append('<div id="miniTip" style="max-width:' + o.maxW + ';"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
 		
 		// declare the containers
-		var tt_w = $('#miniTip');
-		var tt_t = $('#miniTip_t');
-		var tt_c = $('#miniTip_c');
-		var tt_a = $('#miniTip_a');
+		var tt_w = $('#miniTip'),
+			tt_t = $('#miniTip_t'),
+			tt_c = $('#miniTip_c'),
+			tt_a = $('#miniTip_a');
 		
 		// initialize the tooltip
 		return this.each(function(){
+			// make sure the anchor element can be referred to below
+			var el = $(this);
+		
 			// if content is set to false, use the title attribute
-			var cont = (o.content) ? o.content : $(this).attr('title');
+			var cont = o.content ? o.content : el.attr('title');
 			
 			// if the tooltip isn't empty
 			if (cont != '') {
-				// make sure the anchor element can be referred to below
-				var el = $(this);
-				
-				// declare the delay variable
-				var delay = false;
-				
-				// declare variable that checks if the mouse is still on the tooltip
-				var tHov = false;
-				var aHov = true;
+				// declare the delay variable and variables that checks if the mouse is still on the tooltip
+				var delay = false,
+					tHov = false,
+					aHov = true;
 				
 				// if you are using the title attribute, remove it from the anchor
-				if (!o.content) {
+				if (!o.content)
 					el.removeAttr('title');
-				}
 				
 				if (o.event == 'hover') {
 					// add the hover event
@@ -93,7 +86,7 @@
 							},
 							function() {
 								tHov = false;
-								window.setTimeout(function(){if (!aHov && !tt_w.attr('click')) hide()}, 200);
+								setTimeout(function(){if (!aHov && !tt_w.attr('click')) hide()}, 200);
 							}
 						);
 					}
@@ -118,74 +111,72 @@
 				}
 				
 				// show the tooltip
-				function show() {
+				var show = function() {
 					// call the show callback function
-					o.show.call(this);
+					if (o.show) o.show.call(this);
 					
 					// add in the content
 					tt_c.html(cont);
 					
 					// insert the title (or hide if none is set)
-					if (o.title != '') {
-						tt_t.html(o.title);
-						tt_t.show();
-					} else {
+					if (o.title != '')
+						tt_t.html(o.title).show();
+					else
 						tt_t.hide();
-					}
 					
 					// reset arrow position
 					tt_a.removeAttr('class');
 					
 					// make sure the tooltip is the right width even if the anchor is flush to the right of the screen
-					tt_w.width(tt_w.width());
+					tt_w.width('').width(tt_w.width());
 					
 					// get position of anchor element
-					var top = parseInt(el.offset().top);
-					var left = parseInt(el.offset().left);
+					var top = parseInt(el.offset().top, 10),
+						left = parseInt(el.offset().left, 10),
 					
-					// get width and height of the anchor element
-					var elW = parseInt(el.outerWidth());
-					var elH = parseInt(el.outerHeight());
+						// get width and height of the anchor element
+						elW = parseInt(el.outerWidth(), 10),
+						elH = parseInt(el.outerHeight(), 10),
 					
-					// get width and height of the tooltip
-					var tipW = tt_w.outerWidth();
-					var tipH = tt_w.outerHeight();
+						// get width and height of the tooltip
+						tipW = tt_w.outerWidth(),
+						tipH = tt_w.outerHeight(),
 					
-					// calculate the difference between anchor and tooltip
-					var w = Math.round((elW - tipW) / 2);
-					var h = Math.round((elH - tipH) / 2);
+						// calculate the difference between anchor and tooltip
+						w = Math.round((elW - tipW) / 2),
+						h = Math.round((elH - tipH) / 2),
 					
-					// calculate position for tooltip
-					var mLeft = Math.round(left + w);
-					var mTop = Math.round(top + elH + o.offset + 8);
+						// calculate position for tooltip
+						mLeft = Math.round(left + w),
+						mTop = Math.round(top + elH + o.offset + 8),
 					
-					// position of the arrow
-					var aLeft = (Math.round(tipW - 16) / 2) - parseInt(tt_w.css('borderLeftWidth'));
-					var aTop = 0;
+						// position of the arrow
+						aLeft = (Math.round(tipW - 16) / 2) - parseInt(tt_w.css('borderLeftWidth'), 10),
+						aTop = 0,
 					
-					// figure out if the tooltip will go off of the screen
-					var eOut = (left + elW + tipW + o.offset + 8) > parseInt($(window).width());
-					var wOut = (tipW + o.offset + 8) > left;
-					var nOut = (tipH + o.offset + 8) > top - $(window).scrollTop();
-					var sOut = (top + elH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop());
+						// figure out if the tooltip will go off of the screen
+						eOut = (left + elW + tipW + o.offset + 8) > parseInt($(window).width(), 10),
+						wOut = (tipW + o.offset + 8) > left,
+						nOut = (tipH + o.offset + 8) > top - $(window).scrollTop(),
+						sOut = (top + elH + tipH + o.offset + 8) > parseInt($(window).height() + $(window).scrollTop(), 10),
 					
-					// default anchor position
-					var elPos = o.anchor;
+						// default anchor position
+						elPos = o.anchor;
 
 					// calculate where the anchor should be (east & west)
 					if (wOut || o.anchor == 'e' && !eOut) {
 						if (o.anchor == 'w' || o.anchor == 'e') {
 							elPos = 'e';
-							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderRightWidth')));
-							aLeft = -8 - parseInt(tt_w.css('borderRightWidth'));
+							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderRightWidth'), 10));
+							aLeft = -8 - parseInt(tt_w.css('borderRightWidth'), 10);
 							mLeft = left + elW + o.offset + 8;
 							mTop = Math.round((top + elH / 2) - (tipH / 2));
 						}
 					} else if (eOut || o.anchor == 'w' && !wOut) {
 						if (o.anchor == 'w' || o.anchor == 'e') {
 							elPos = 'w';
-							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderLeftWidth')));
-							aLeft = tipW - parseInt(tt_w.css('borderLeftWidth'));
+							aTop = Math.round((tipH / 2) - 8 - parseInt(tt_w.css('borderLeftWidth'), 10));
+							aLeft = tipW - parseInt(tt_w.css('borderLeftWidth'), 10);
 							mLeft = left - tipW - o.offset - 8;
 							mTop = Math.round((top + elH / 2) - (tipH / 2));
 						}
@@ -195,13 +186,13 @@
 					if (sOut || o.anchor == 'n' && !nOut) {
 						if (o.anchor == 'n' || o.anchor == 's') {
 							elPos = 'n';
-							aTop = tipH - parseInt(tt_w.css('borderTopWidth'));
+							aTop = tipH - parseInt(tt_w.css('borderTopWidth'), 10);
 							mTop = top - (tipH + o.offset + 8);
 						}
 					} else if (nOut || o.anchor == 's' && !sOut) {
 						if (o.anchor == 'n' || o.anchor == 's') {
 							elPos = 's';
-							aTop = -8 - parseInt(tt_w.css('borderBottomWidth'));					
+							aTop = -8 - parseInt(tt_w.css('borderBottomWidth'), 10);					
 							mTop = top + elH + o.offset + 8;
 						}
 					}
@@ -213,31 +204,31 @@
 					if (delay) clearTimeout(delay);
 					
 					// position the tooltip and show it
-					delay = window.setTimeout(function(){ tt_w.css({"margin-left": mLeft+"px", "margin-top": mTop + 'px'}).stop(true,true).fadeIn(o.fadeIn); }, o.delay);
+					delay = setTimeout(function(){ tt_w.css({"margin-left": mLeft+"px", "margin-top": mTop + 'px'}).stop(true,true).fadeIn(o.fadeIn); }, o.delay);
 				}
 		
 				// hide the tooltip
-				function hide() {
+				var hide = function() {
 					if (!o.aHide && !tHov || o.aHide) {
 						// clear delay timer if exists
 						if (delay) clearTimeout(delay);
 						
 						// fade out the tooltip
-						delay = window.setTimeout(function(){hide2()}, o.delay);
+						delay = setTimeout(function(){hide2()}, o.delay);
 					}
 				}
 				
 				// make a second hide function if the tooltip is set to not auto hide
-				function hide2() {
+				var hide2 = function() {
 					// if the mouse isn't on the tooltip or the anchor, hide it, otherwise loop back through
 					if (!o.aHide && !tHov || o.aHide) {
 						// fade out the tooltip
 						tt_w.stop(true,true).fadeOut(o.fadeOut);
 						
 						// call the show callback function
-						o.hide.call(this);
+						if (o.hide) o.hide.call(this);
 					} else
-						window.setTimeout(function(){hide()}, 200);
+						setTimeout(function(){hide()}, 200);
 				}
 			}
 		});

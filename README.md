@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.1.0)
+jQuery miniTip Plugin (v1.2.0)
 ---------------------
 
 License
@@ -66,6 +66,10 @@ Requirements
 
 Changelog
 ============
+### Version 1.2.0 (July 23, 2011) ###
+* Cleaned and condensed code.
+* Fixed bug that caused multiple tooltips on the same page to all be the same size.
+
 ### Version 1.1.0 (July 22, 2011) ###
 * Automatic repositioning of the tooltip anchor point now works correctly on page scroll.
 * Bug fixed that caused odd behavior when the anchor was flush to the right of the screen.
