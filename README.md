@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.2.2)
+jQuery miniTip Plugin (v1.2.5)
 ---------------------
 
 License
@@ -69,6 +69,7 @@ Changelog
 ### Version 1.2.1 (July 23, 2011) ###
 * Fixed odd behavior when showing new tooltip when previous was still fading out.
 * Fixed bug that caused tooltips to randomly hide when long delays were used.
+* Fixed a bug that prevented a second tooltip from showing when the previous had aHide = false.
 
 ### Version 1.2.0 (July 23, 2011) ###
 * Cleaned and condensed code.

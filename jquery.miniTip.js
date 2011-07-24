@@ -1,5 +1,5 @@
 /*!
- * miniTip v1.2.2
+ * miniTip v1.2.5
  *
  * Updated: July 23, 2011
  * Requires: jQuery v1.3+
@@ -88,7 +88,7 @@
 							},
 							function() {
 								tHov = false;
-								setTimeout(function(){if (!aHov && !tt_w.attr('click')) hide()}, 200);
+								setTimeout(function(){if (!aHov && !tt_w.attr('click')) hide()}, 20);
 							}
 						);
 					}
