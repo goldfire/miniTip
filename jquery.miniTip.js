@@ -1,5 +1,5 @@
 /*!
- * miniTip v1.2.0
+ * miniTip v1.2.2
  *
  * Updated: July 23, 2011
  * Requires: jQuery v1.3+
@@ -16,7 +16,7 @@
 (function($){
     $.fn.miniTip = function(opts) {
         // declare the default option values
-    	var d = {
+        var d = {
 			title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
@@ -52,9 +52,11 @@
 			
 			// if the tooltip isn't empty
 			if (cont != '') {
-				// declare the delay variable and variables that checks if the mouse is still on the tooltip
-				var delay = false,
-					tHov = false,
+				// declare the delay variable and make sure it is global
+				window.delay = false;
+				
+				// declare the variables that check if the mouse is still on the tooltip
+				var tHov = false,
 					aHov = true;
 				
 				// if you are using the title attribute, remove it from the anchor
@@ -128,7 +130,7 @@
 					tt_a.removeAttr('class');
 					
 					// make sure the tooltip is the right width even if the anchor is flush to the right of the screen
-					tt_w.width('').width(tt_w.width());
+					tt_w.hide().width('').width(tt_w.width());
 					
 					// get position of anchor element
 					var top = parseInt(el.offset().top, 10),
