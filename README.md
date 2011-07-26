@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.2.5)
+jQuery miniTip Plugin (v1.2.6)
 ---------------------
 
 License
@@ -66,7 +66,10 @@ Requirements
 
 Changelog
 ============
-### Version 1.2.1 (July 23, 2011) ###
+### Version 1.2.6 (July 26, 2011) ###
+* maxW option now works as expected.
+
+### Version 1.2.5 (July 23, 2011) ###
 * Fixed odd behavior when showing new tooltip when previous was still fading out.
 * Fixed bug that caused tooltips to randomly hide when long delays were used.
 * Fixed a bug that prevented a second tooltip from showing when the previous had aHide = false.

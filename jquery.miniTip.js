@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.2.5
+ * miniTip v1.2.6
  *
- * Updated: July 23, 2011
+ * Updated: July 26, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -34,7 +34,7 @@
 		
 		// add the tip elements to the DOM
 		if ($('#miniTip').length <= 0)
-			$('body').append('<div id="miniTip" style="max-width:' + o.maxW + ';"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
+			$('body').append('<div id="miniTip"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
 		
 		// declare the containers
 		var tt_w = $('#miniTip'),
@@ -130,7 +130,8 @@
 					tt_a.removeAttr('class');
 					
 					// make sure the tooltip is the right width even if the anchor is flush to the right of the screen
-					tt_w.hide().width('').width(tt_w.width());
+                    // set the max width
+					tt_w.hide().width('').width(tt_w.width()).css('max-width', o.maxW);
 					
 					// get position of anchor element
 					var top = parseInt(el.offset().top, 10),
