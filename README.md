@@ -39,7 +39,7 @@ Examples
 ========
 This is the most basic usage. It displays a miniTip on mouseover of the element with ID "tip" and content of the title tag (maximum width of 250px). Mouseout of the "tip" hides the miniTip.
 
-    $('#tip).miniTip();
+    $('#tip').miniTip();
 
 This is a more advanced example utilizing all available options (as of v1.0). The element with ID of "tip" will be activated by click instead of mouseover. It will have a title bar with text "Title Bar" and content defined in the JS call. It will wait .5s before showing and hiding the tooltip, and the fade animation will be .5s both ways. The default anchor position is east (the right side of the anchor element). Auto-hide is set to false, so the tooltip will only hide once your mouse is off of the tooltip and the anchor element. The max width is set to 50px and the offset is 15px, so the tooltip's stem will be 15px from the edge of the anchor element. Finally, an event will fire when the tooltip is shown (alerting "Hello,"), and another will be fired when it is hidden (alerting "World!").
 
