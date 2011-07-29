@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.2.6
+ * miniTip v1.3.0
  *
- * Updated: July 26, 2011
+ * Updated: July 28, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -17,7 +17,7 @@
     $.fn.miniTip = function(opts) {
         // declare the default option values
         var d = {
-			title:		'', // if left blank, no title bar will show
+    		title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
 			anchor:		'n', // n (top), s (bottom), e (right), w (left)
@@ -33,7 +33,7 @@
 			o = $.extend(d, opts);
 		
 		// add the tip elements to the DOM
-		if ($('#miniTip').length <= 0)
+		if (!$('#miniTip')[0])
 			$('body').append('<div id="miniTip"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
 		
 		// declare the containers
@@ -133,24 +133,44 @@
                     // set the max width
 					tt_w.hide().width('').width(tt_w.width()).css('max-width', o.maxW);
 					
-					// get position of anchor element
-					var top = parseInt(el.offset().top, 10),
-						left = parseInt(el.offset().left, 10),
-					
+					// add support for image maps
+					if (el.is('area')) {
+						// declare variables to determine coordinates
+						var i,
+							x = [],
+							y = [],
+							c = el.attr('coords').split(',');
+						
+						// loop through the coordinates and populate x & y arrays
+						for (i=0; i < c.length; i++){
+							x.push(c[i++]);
+							y.push(c[i]);
+						}
+						
+						// get the center coordinates of the area
+						var left = parseInt(el.parent().offset().left, 10) + parseInt((parseInt(x.sort(num)[0], 10) + parseInt(x.sort(num)[x.length-1], 10)) / 2, 10),
+							top = parseInt(el.parent().offset().top, 10) + parseInt((parseInt(y.sort(num)[0], 10) + parseInt(y.sort(num)[y.length-1], 10)) / 2, 10);
+						
+						// sortin funciton for coordinates
+						function num (a, b) {
+							return a - b;
+						}
+					} else {
+						// get the coordinates of the element
+						var top = parseInt(el.offset().top, 10),
+							left = parseInt(el.offset().left, 10);
+					}
+
 						// get width and height of the anchor element
-						elW = parseInt(el.outerWidth(), 10),
+					var	elW = parseInt(el.outerWidth(), 10),
 						elH = parseInt(el.outerHeight(), 10),
 					
 						// get width and height of the tooltip
 						tipW = tt_w.outerWidth(),
 						tipH = tt_w.outerHeight(),
 					
-						// calculate the difference between anchor and tooltip
-						w = Math.round((elW - tipW) / 2),
-						h = Math.round((elH - tipH) / 2),
-					
 						// calculate position for tooltip
-						mLeft = Math.round(left + w),
+						mLeft = Math.round(left + Math.round((elW - tipW) / 2)),
 						mTop = Math.round(top + elH + o.offset + 8),
 					
 						// position of the arrow

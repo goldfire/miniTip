@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.2.6)
+jQuery miniTip Plugin (v1.3.0)
 ---------------------
 
 License
@@ -17,9 +17,10 @@ Description
 
 ### Features  ###
 
-* JS + CSS is just 4kb minified (1.5kb gzipped)!
+* JS + CSS is just 4.38kb minified (1.7kb gzipped)!
 * No images
 * Automatically stays within viewport
+* Automatic support for image maps
 * Extremely easy to style
 * Use text or HTML from title tag, hidden element, or JS declaration
 * Fade in and out
@@ -66,6 +67,9 @@ Requirements
 
 Changelog
 ============
+### Version 1.3.0 (July 28, 2011) ###
+* Added support for image maps. miniTip will detect and center itself in area.
+
 ### Version 1.2.6 (July 26, 2011) ###
 * maxW option now works as expected.
 
