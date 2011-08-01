@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.3.0)
+jQuery miniTip Plugin (v1.3.1)
 ---------------------
 
 License
@@ -67,6 +67,9 @@ Requirements
 
 Changelog
 ============
+### Version 1.3.1 (August 1, 2011) ###
+* Click behavior now works correctly when html is used within tooltip.
+
 ### Version 1.3.0 (July 28, 2011) ###
 * Added support for image maps. miniTip will detect and center itself in area.
 

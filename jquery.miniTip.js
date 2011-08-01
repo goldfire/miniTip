@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.3.0
+ * miniTip v1.3.1
  *
- * Updated: July 28, 2011
+ * Updated: August 1, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -17,7 +17,7 @@
     $.fn.miniTip = function(opts) {
         // declare the default option values
         var d = {
-    		title:		'', // if left blank, no title bar will show
+        	title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
 			anchor:		'n', // n (top), s (bottom), e (right), w (left)
@@ -108,7 +108,7 @@
 					
 					// clear the tooltip if anywhere but the tooltip itself is clicked
 					$('html').click(function(e){
-						if (tt_w.css('display') == 'block' && $.inArray(e.target.id, ['miniTip', 'miniTip_c', 'miniTip_a', 'miniTip_t']) < 0) hide();
+						if (tt_w.css('display') == 'block' && $('#' + e.target.id).parents().find('#miniTip').length == 0) hide();
 					});
 				}
 				
