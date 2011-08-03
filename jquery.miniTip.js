@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.3.1
+ * miniTip v1.3.2
  *
- * Updated: August 1, 2011
+ * Updated: August 3, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -108,7 +108,7 @@
 					
 					// clear the tooltip if anywhere but the tooltip itself is clicked
 					$('html').click(function(e){
-						if (tt_w.css('display') == 'block' && $('#' + e.target.id).parents().find('#miniTip').length == 0) hide();
+						if (tt_w.css('display') == 'block' && !$(e.target).closest('#miniTip').length) hide();
 					});
 				}
 				

@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.3.1)
+jQuery miniTip Plugin (v1.3.2)
 ---------------------
 
 License
@@ -67,6 +67,9 @@ Requirements
 
 Changelog
 ============
+### Version 1.3.1 (August 3, 2011) ###
+* Improvement to fix in 1.3.1.
+
 ### Version 1.3.1 (August 1, 2011) ###
 * Click behavior now works correctly when html is used within tooltip.
 
