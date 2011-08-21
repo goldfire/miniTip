@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.3.2)
+jQuery miniTip Plugin (v1.4.0)
 ---------------------
 
 License
@@ -17,7 +17,7 @@ Description
 
 ### Features  ###
 
-* JS + CSS is just 4.38kb minified (1.7kb gzipped)!
+* JS + CSS is just 4.5kb minified (1.7kb gzipped)!
 * No images
 * Automatically stays within viewport
 * Automatic support for image maps
@@ -67,7 +67,12 @@ Requirements
 
 Changelog
 ============
-### Version 1.3.1 (August 3, 2011) ###
+### Version 1.4.0 (August 21, 2011) ###
+* Fixed issue with tooltips going off the screen by adding automated support for anchors on the corners of the tooltips.
+* Fixed issue with blank tooltips showing on elements with no content or title specified.
+* Fixed mixing of spaces and tabs in miniTip.css.
+
+### Version 1.3.2 (August 3, 2011) ###
 * Improvement to fix in 1.3.1.
 
 ### Version 1.3.1 (August 1, 2011) ###
