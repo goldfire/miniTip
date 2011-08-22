@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.4.0
+ * miniTip v1.4.1
  *
- * Updated: August 21, 2011
+ * Updated: August 22, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -17,7 +17,7 @@
     $.fn.miniTip = function(opts) {
         // declare the default option values
         var d = {
-            title:		'', // if left blank, no title bar will show
+            title:    	'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
 			anchor:		'n', // n (top), s (bottom), e (right), w (left)
@@ -219,13 +219,13 @@
 							mTop = top + elH + o.offset + 8;
 						}
 					}
-					
+
 					// if it is going to go off on the sides, use corner
 					if (o.anchor == 'n' || o.anchor == 's') {
-						if (wOut) {
-							mLeft = aLeft - 16 - parseInt(tt_w.css('borderRightWidth'), 10) * 2;
+						if ((tipW / 2) > left) {
+							mLeft = mLeft < 0 ? aLeft + mLeft : aLeft;
 							aLeft = 0;
-						} else if (eOut) {
+						} else if ((left + tipW / 2) > parseInt($(window).width(), 10)) {
 							mLeft -= aLeft;
 							aLeft *= 2;
 						}

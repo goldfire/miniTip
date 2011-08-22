@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.4.0)
+jQuery miniTip Plugin (v1.4.1)
 ---------------------
 
 License
@@ -67,6 +67,9 @@ Requirements
 
 Changelog
 ============
+### Version 1.4.1 (August 22, 2011) ###
+* A few bug fixes associated with the corners feature in 1.4.0.
+
 ### Version 1.4.0 (August 21, 2011) ###
 * Fixed issue with tooltips going off the screen by adding automated support for anchors on the corners of the tooltips.
 * Fixed issue with blank tooltips showing on elements with no content or title specified.
