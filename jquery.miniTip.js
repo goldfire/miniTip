@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.4.1
+ * miniTip v1.4.2
  *
- * Updated: August 22, 2011
+ * Updated: September 12, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -17,7 +17,7 @@
     $.fn.miniTip = function(opts) {
         // declare the default option values
         var d = {
-            title:    	'', // if left blank, no title bar will show
+            title:        '', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
 			anchor:		'n', // n (top), s (bottom), e (right), w (left)
@@ -26,7 +26,8 @@
 			fadeOut:	200, // speed of fade out animation (ms)
 			aHide:		true, // set to false to only hide when the mouse moves away from the anchor and tooltip
 			maxW:		'250px', // max width of tooltip
-			offset:		5 // offset in pixels of stem from anchor
+			offset:		5, // offset in pixels of stem from anchor
+			hide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
 		},
 		
 			// merge the defaults with the user declared options
@@ -41,6 +42,12 @@
 			tt_t = $('#miniTip_t'),
 			tt_c = $('#miniTip_c'),
 			tt_a = $('#miniTip_a');
+		
+		// manually hide the tooltip if $('#id').miniTip({hide: true}); is called
+		if (o.hide) {
+			tt_w.stop(true,true).fadeOut(o.fadeOut);
+			return false;
+		}
 		
 		// initialize the tooltip
 		return this.each(function(){

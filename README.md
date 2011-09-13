@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.4.1)
+jQuery miniTip Plugin (v1.4.2)
 ---------------------
 
 License
@@ -67,6 +67,9 @@ Requirements
 
 Changelog
 ============
+### Version 1.4.2 (September 12, 2011) ###
+* Added function to manually hide tooltip by calling $('#id').miniTip({hide: true});
+
 ### Version 1.4.1 (August 22, 2011) ###
 * A few bug fixes associated with the corners feature in 1.4.0.
 
