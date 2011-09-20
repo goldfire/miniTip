@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.4.2
+ * miniTip v1.4.3
  *
- * Updated: September 12, 2011
+ * Updated: September 20, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
