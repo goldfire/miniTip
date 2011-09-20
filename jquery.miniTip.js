@@ -132,6 +132,9 @@
 						tt_t.html(o.title).show();
 					else
 						tt_t.hide();
+						
+					// call the render callback function
+					if (o.render) o.render(tt_w);
 					
 					// reset arrow position
 					tt_a.removeAttr('class');
