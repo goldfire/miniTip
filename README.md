@@ -69,6 +69,7 @@ Changelog
 ============
 ### Version 1.4.3 (September 20, 2011) ###
 * Added a render callback which is called when the element is shown (thanks Denis Krienbühl).
+* Changes manual hide function from $('#id').miniTip({hide: true}); to $('#id').miniTip({doHide: true}); to fix compatibility.
 
 ### Version 1.4.2 (September 12, 2011) ###
 * Added function to manually hide tooltip by calling $('#id').miniTip({hide: true});

@@ -27,7 +27,7 @@
 			aHide:		true, // set to false to only hide when the mouse moves away from the anchor and tooltip
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
-			hide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			doHide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
 		},
 		
 			// merge the defaults with the user declared options
@@ -44,7 +44,7 @@
 			tt_a = $('#miniTip_a');
 		
 		// manually hide the tooltip if $('#id').miniTip({hide: true}); is called
-		if (o.hide) {
+		if (o.doHide) {
 			tt_w.stop(true,true).fadeOut(o.fadeOut);
 			return false;
 		}
