@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.4.3)
+jQuery miniTip Plugin (v1.4.4)
 ---------------------
 
 License
@@ -67,6 +67,9 @@ Requirements
 
 Changelog
 ============
+### Version 1.4.4 (November 27, 2011) ###
+* Enabled better clickhandling with multiple miniTips (thanks Denis Krienbühl).
+
 ### Version 1.4.3 (September 20, 2011) ###
 * Added a render callback which is called when the element is shown (thanks Denis Krienbühl).
 * Changes manual hide function from $('#id').miniTip({hide: true}); to $('#id').miniTip({doHide: true}); to fix compatibility.

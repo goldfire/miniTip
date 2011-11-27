@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.4.3
+ * miniTip v1.4.4
  *
- * Updated: September 20, 2011
+ * Updated: November 27, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -15,9 +15,9 @@
 
 (function($){
     $.fn.miniTip = function(opts) {
-        // declare the default option values
-        var d = {
-            title:        '', // if left blank, no title bar will show
+		// declare the default option values
+		var d = {
+			title:		'', // if left blank, no title bar will show
 			content:	false, // the content of the tooltip
 			delay:		300, // how long to wait before showing and hiding the tooltip (ms)
 			anchor:		'n', // n (top), s (bottom), e (right), w (left)
@@ -108,15 +108,15 @@
 						// make sure we know this was activated by click
 						tt_w.attr('click', 't');
 						
-			                        if (tt_w.data('last_target') !== el) {
-			                            // rerender the tooltip if the target changed
-			                            show();
-			                        } else {
-			                            // show the tooltip, unless it is already showing, then close it
-			                            if (tt_w.css('display') == 'none') show(); else hide();    
-			                        }
-			
-			                        tt_w.data('last_target', el);
+						if (tt_w.data('last_target') !== el) {
+							// rerender the tooltip if the target changed
+							show();
+						} else {
+							// show the tooltip, unless it is already showing, then close it
+							if (tt_w.css('display') == 'none') show(); else hide();    
+						}
+
+						tt_w.data('last_target', el);
 
 						return false;
 					});
@@ -148,7 +148,7 @@
 					tt_a.removeAttr('class');
 					
 					// make sure the tooltip is the right width even if the anchor is flush to the right of the screen
-                    // set the max width
+					// set the max width
 					tt_w.hide().width('').width(tt_w.width()).css('max-width', o.maxW);
 					
 					// add support for image maps
