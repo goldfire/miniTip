@@ -79,7 +79,7 @@
 							
 							// show the tooltip
 							aHov = true;
-							show();
+							show.call(this);
 						},
 						function(){
 							aHov = false;
@@ -110,10 +110,10 @@
 						
 						if (tt_w.data('last_target') !== el) {
 							// rerender the tooltip if the target changed
-							show();
+							show.call(this);
 						} else {
 							// show the tooltip, unless it is already showing, then close it
-							if (tt_w.css('display') == 'none') show(); else hide();    
+							if (tt_w.css('display') == 'none') show.call(this); else hide();
 						}
 
 						tt_w.data('last_target', el);
@@ -130,8 +130,13 @@
 				// show the tooltip
 				var show = function() {
 					// call the show callback function
-					if (o.show) o.show.call(this);
-					
+					if (o.show) o.show.call(this, o);
+
+                    // use content set by callback, if any
+                    if (o.content && o.content != '') {
+                        cont = o.content
+                    }
+
 					// add in the content
 					tt_c.html(cont);
 					
