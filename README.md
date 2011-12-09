@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.4.4)
+jQuery miniTip Plugin (v1.5.0)
 ---------------------
 
 License
@@ -67,6 +67,10 @@ Requirements
 
 Changelog
 ============
+### Version 1.5.0 (December 9, 2011) ###
+* Fix image map compatibility for Firefox and Opera.
+* Allow show() callback to access options and element context for dynamically overriding content (Wolfram Arnold).
+
 ### Version 1.4.4 (November 27, 2011) ###
 * Enabled better clickhandling with multiple miniTips (thanks Denis Krienbühl).
 

@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.4.4
+ * miniTip v1.5.0
  *
- * Updated: November 27, 2011
+ * Updated: December 9, 2011
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -132,10 +132,10 @@
 					// call the show callback function
 					if (o.show) o.show.call(this, o);
 
-                    // use content set by callback, if any
-                    if (o.content && o.content != '') {
-                        cont = o.content
-                    }
+					// use content set by callback, if any
+					if (o.content && o.content != '') {
+						cont = o.content;
+					}
 
 					// add in the content
 					tt_c.html(cont);
@@ -157,12 +157,18 @@
 					tt_w.hide().width('').width(tt_w.width()).css('max-width', o.maxW);
 					
 					// add support for image maps
-					if (el.is('area')) {
+					var isArea = el.is('area');
+					if (isArea) {
 						// declare variables to determine coordinates
 						var i,
 							x = [],
 							y = [],
 							c = el.attr('coords').split(',');
+						
+						// sortin funciton for coordinates
+						function num (a, b) {
+							return a - b;
+						}
 						
 						// loop through the coordinates and populate x & y arrays
 						for (i=0; i < c.length; i++){
@@ -171,13 +177,10 @@
 						}
 						
 						// get the center coordinates of the area
-						var left = parseInt(el.parent().offset().left, 10) + parseInt((parseInt(x.sort(num)[0], 10) + parseInt(x.sort(num)[x.length-1], 10)) / 2, 10),
-							top = parseInt(el.parent().offset().top, 10) + parseInt((parseInt(y.sort(num)[0], 10) + parseInt(y.sort(num)[y.length-1], 10)) / 2, 10);
-						
-						// sortin funciton for coordinates
-						function num (a, b) {
-							return a - b;
-						}
+						var mapImg = el.parent().attr('name'),
+							mapOff = $('img[usemap=\\#' + mapImg + ']').offset(),
+							left = parseInt(mapOff.left, 10) + parseInt((parseInt(x.sort(num)[0], 10) + parseInt(x.sort(num)[x.length-1], 10)) / 2, 10),
+							top = parseInt(mapOff.top, 10) + parseInt((parseInt(y.sort(num)[0], 10) + parseInt(y.sort(num)[y.length-1], 10)) / 2, 10);
 					} else {
 						// get the coordinates of the element
 						var top = parseInt(el.offset().top, 10),
@@ -185,8 +188,8 @@
 					}
 
 						// get width and height of the anchor element
-					var	elW = parseInt(el.outerWidth(), 10),
-						elH = parseInt(el.outerHeight(), 10),
+					var	elW = isArea ? 0 : parseInt(el.outerWidth(), 10),
+						elH = isArea ? 0 : parseInt(el.outerHeight(), 10),
 					
 						// get width and height of the tooltip
 						tipW = tt_w.outerWidth(),
