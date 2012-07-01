@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.5.0)
+jQuery miniTip Plugin (v1.5.1)
 ---------------------
 
 License
@@ -67,6 +67,11 @@ Requirements
 
 Changelog
 ============
+### Version 1.5.1 (June 30, 2012) ###
+* Switched to UglifyJS for minified version.
+* Fixed issue that added multiple click events to the html element.
+* Call the hide custom function on the correct tooltip when multiple miniTips are used on the same page.
+
 ### Version 1.5.0 (December 9, 2011) ###
 * Fix image map compatibility for Firefox and Opera.
 * Allow show() callback to access options and element context for dynamically overriding content (Wolfram Arnold).

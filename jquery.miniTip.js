@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.5.0
+ * miniTip v1.5.1
  *
- * Updated: December 9, 2011
+ * Updated: June 30, 2012
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -14,7 +14,7 @@
 */
 
 (function($){
-    $.fn.miniTip = function(opts) {
+	$.fn.miniTip = function(opts) {
 		// declare the default option values
 		var d = {
 			title:		'', // if left blank, no title bar will show
@@ -118,12 +118,12 @@
 
 						tt_w.data('last_target', el);
 
+						// clear the tooltip if anywhere but the tooltip itself is clicked
+						$('html').unbind('click').click(function(e){
+							if (tt_w.css('display') == 'block' && !$(e.target).closest('#miniTip').length) hide();
+						});
+
 						return false;
-					});
-					
-					// clear the tooltip if anywhere but the tooltip itself is clicked
-					$('html').click(function(e){
-						if (tt_w.css('display') == 'block' && !$(e.target).closest('#miniTip').length) hide();
 					});
 				}
 				
