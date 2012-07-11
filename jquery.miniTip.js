@@ -28,7 +28,7 @@
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
 			doHide:		false,  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
-			className:      '' //scope miniTip for styling
+			className:      'miniTip' //scope miniTip for styling - miniTip is default class
 		
 		},
 		
@@ -36,7 +36,7 @@
 			o = $.extend(d, opts);
 		
 		// add the tip elements to the DOM
-		if (!$('#miniTip')[0])
+		if (!$('#miniTip.'+ o.className ='')[0])
 			$('body').append('<div id="miniTip" class="'+ o.className ='"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
 		
 		// declare the containers
