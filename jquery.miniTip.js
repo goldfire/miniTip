@@ -36,7 +36,7 @@
 			o = $.extend(d, opts);
 		
 		// add the tip elements to the DOM
-		if (!$('#miniTip.'+ o.className ='')[0])
+		if (!$('#miniTip.'+ o.className +'')[0])
 			$('body').append('<div id="miniTip" class="'+ o.className ='"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
 		
 		// declare the containers
