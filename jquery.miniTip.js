@@ -27,15 +27,17 @@
 			aHide:		true, // set to false to only hide when the mouse moves away from the anchor and tooltip
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
-			doHide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			doHide:		false,  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			className:      'miniTip' //scope miniTip for styling - miniTip is default class
+		
 		},
 		
 			// merge the defaults with the user declared options
 			o = $.extend(d, opts);
 		
 		// add the tip elements to the DOM
-		if (!$('#miniTip')[0])
-			$('body').append('<div id="miniTip"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
+		if (!$('#miniTip.'+ o.className +'')[0])
+			$('body').append('<div id="miniTip" class="'+ o.className +'"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
 		
 		// declare the containers
 		var tt_w = $('#miniTip'),
