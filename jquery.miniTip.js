@@ -28,7 +28,8 @@
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
 			doHide:		false,  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
-			className:      'miniTip' //scope miniTip for styling - miniTip is default class
+			className:      'miniTip', //scope miniTip for styling - miniTip is default class
+			horizOffset:	'0' //sets x-axis offset of arrow when tooltip repositions due to viewport
 		
 		},
 		
@@ -251,8 +252,8 @@
 					// if it is going to go off on the sides, use corner
 					if (o.anchor == 'n' || o.anchor == 's') {
 						if ((tipW / 2) > left) {
-							mLeft = mLeft < 0 ? aLeft + mLeft : aLeft;
-							aLeft = 0;
+							mLeft = mLeft < 0 ? aLeft + mLeft - o.horizOffset : aLeft;
+							aLeft = o.horizOffset;
 						} else if ((left + tipW / 2) > parseInt($(window).width(), 10)) {
 							mLeft -= aLeft;
 							aLeft *= 2;
