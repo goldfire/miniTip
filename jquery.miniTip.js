@@ -87,6 +87,11 @@
 						function(){
 							aHov = false;
 							hide();
+							
+							// testing multiple tooltip styles/same page
+							if (('#miniTip').length ){
+								$('#miniTip').attr('class', '').addClass(o.className);
+								}
 						}
 					);
 					
