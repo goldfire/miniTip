@@ -1,7 +1,7 @@
 /*!
- * miniTip v1.5.2
+ * miniTip v1.5.3
  *
- * Updated: July 13, 2012
+ * Updated: July 15, 2012
  * Requires: jQuery v1.3+
  *
  * (c) 2011, James Simpson
@@ -27,6 +27,7 @@
 			aHide:		true, // set to false to only hide when the mouse moves away from the anchor and tooltip
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
+			stemOff: 	0, // x-axis offset of stem, set to value of border-radius to adjust for viewport correction
 			doHide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
 		},
 		
@@ -120,7 +121,10 @@
 
 						// clear the tooltip if anywhere but the tooltip itself is clicked
 						$('html').unbind('click').click(function(e){
-							if (tt_w.css('display') == 'block' && !$(e.target).closest('#miniTip').length) hide();
+							if (tt_w.css('display') == 'block' && !$(e.target).closest('#miniTip').length) {
+								$('html').unbind('click');
+								hide();
+							}
 						});
 
 						return false;
@@ -266,7 +270,7 @@
 					}
 					
 					// position the arrow
-					tt_a.css({'margin-left': (aLeft > 0 ? aLeft : aLeft + parseInt(tt_w.css('borderRadius'), 10) / 2) + 'px', 'margin-top': aTop + 'px'}).attr('class', elPos);
+					tt_a.css({'margin-left': (aLeft > 0 ? aLeft : aLeft + parseInt(o.stemOff, 10) / 2) + 'px', 'margin-top': aTop + 'px'}).attr('class', elPos);
 					
 					// clear delay timer if exists
 					if (delay) clearTimeout(delay);

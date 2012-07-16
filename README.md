@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.5.2)
+jQuery miniTip Plugin (v1.5.3)
 ---------------------
 
 License
@@ -55,6 +55,7 @@ This is a more advanced example utilizing all available options (as of v1.0). Th
       aHide: false,
       maxW: '50px',
       offset: 15,
+      stemOff: 0,
       show: function(){ alert('Hello,'); },
       hide: funciton(){ alert('World!'); }
     });

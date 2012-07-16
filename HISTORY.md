@@ -1,3 +1,7 @@
+### Version 1.5.3 (July 15, 2012) ###
+* Added 'stemOff' option to correct stem positioning when a large browser-radius is used (cross browser solution, thanks Jason Day).
+* Correctly unbind HTML click event on miniTip hide.
+
 ### Version 1.5.2 (July 13, 2012) ###
 * Better organized codebase with /src folder and split the changelog into its own file.
 * Dynamically position arrow when large border-radius is used.
