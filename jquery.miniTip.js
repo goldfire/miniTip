@@ -249,7 +249,7 @@
 					// if it is going to go off on the sides, use corner
 					if (o.anchor == 'n' || o.anchor == 's') {
 						if ((tipW / 2) > left) {
-							mLeft = mLeft < 0 ? aLeft + mLeft : aLeft;
+							mLeft = mLeft < 0 ? aLeft + mLeft - o.stemOff/2 : aLeft;
 							aLeft = 0;
 						} else if ((left + tipW / 2) > parseInt($(window).width(), 10)) {
 							mLeft -= aLeft;
