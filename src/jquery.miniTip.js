@@ -28,7 +28,8 @@
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
 			stemOff: 	0, // x-axis offset of stem, set to value of border-radius to adjust for viewport correction
-			doHide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			doHide:		false,
+		className:	'miniTip'
 		},
 		
 			// merge the defaults with the user declared options
@@ -36,8 +37,8 @@
 		
 		// add the tip elements to the DOM
 		if (!$('#miniTip')[0])
-			$('body').append('<div id="miniTip"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
-		
+			$('body').append('<div id="miniTip" class="' + o.className +'"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
+			
 		// declare the containers
 		var tt_w = $('#miniTip'),
 			tt_t = $('#miniTip_t'),
@@ -253,7 +254,7 @@
 					// if it is going to go off on the sides, use corner
 					if (o.anchor == 'n' || o.anchor == 's') {
 						if ((tipW / 2) > left) {
-							mLeft = mLeft < 0 ? aLeft + mLeft : aLeft;
+							mLeft = mLeft < 0 ? aLeft + mLeft - o.stemOff/2 : aLeft;
 							aLeft = 0;
 						} else if ((left + tipW / 2) > parseInt($(window).width(), 10)) {
 							mLeft -= aLeft;
