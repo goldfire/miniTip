@@ -28,21 +28,22 @@
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
 			stemOff: 	0, // x-axis offset of stem, set to value of border-radius to adjust for viewport correction
-			doHide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			doHide:		false,  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			tipID:		'miniTip' //tip ID, allows multiple tooltips per page (styling, orientation, etc.)
 		},
 		
 			// merge the defaults with the user declared options
 			o = $.extend(d, opts);
 		
 		// add the tip elements to the DOM
-		if (!$('#miniTip')[0])
-			$('body').append('<div id="miniTip"><div id="miniTip_t"></div><div id="miniTip_c"></div><div id="miniTip_a"></div></div>');
+		if (!$('#' + o.tipID +')[0])
+			$('body').append('<div id="' + o.tipID + '"><div id="' + o.tipID + '_t"></div><div id="' + o.tipID + '_c"></div><div id="' + o.tipID + '_a"></div></div>');
 		
 		// declare the containers
-		var tt_w = $('#miniTip'),
-			tt_t = $('#miniTip_t'),
-			tt_c = $('#miniTip_c'),
-			tt_a = $('#miniTip_a');
+		var tt_w = $('#' + o.tipID + '),
+			tt_t = $('#' + o.tipID + '_t'),
+			tt_c = $('#' + o.tipID + '_c'),
+			tt_a = $('#' + o.tipID + '_a');
 		
 		// manually hide the tooltip if $('#id').miniTip({hide: true}); is called
 		if (o.doHide) {
