@@ -28,7 +28,7 @@
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
 			doHide:		false,  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
-			className:      'miniTip', //scope miniTip for styling - miniTip is default class
+			className:      '', //scope miniTip for styling
 			tipOff:		'0' //sets x-axis offset of arrow when tooltip repositions due to viewport
 		
 		},
