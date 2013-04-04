@@ -1,0 +1,39 @@
+{
+    "name": "miniTip",
+    "title": "miniTip",
+    "description": "Ultra lightweight jQuery tooltip plugin.",
+    "keywords": [
+        "tooltip",
+        "tip",
+        "ui"
+    ],
+    "version": "1.5.3",
+    "author": {
+        "name": "James Simpson",
+        "url": "http://goldfirestudios.com"
+    },
+    "maintainers": [
+        {
+            "name": "James Simpson",
+            "url": "http://goldfirestudios.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/goldfire/miniTip"
+        },
+        {
+            "type": "GPL",
+            "url": "https://github.com/goldfire/miniTip"
+        }
+    ],
+    "bugs": "https://github.com/goldfire/miniTip/issues",
+    "homepage": "http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin",
+    "demo": "http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin",
+    "docs": "http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin",
+    "download": "http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin",
+    "dependencies": {
+        "jquery": ">=1.3"
+    }
+}
