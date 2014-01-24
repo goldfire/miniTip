@@ -1,0 +1,16 @@
+{
+  "name": "jquery.miniTip",
+  "version": "1.5.3",
+  "homepage": "https://github.com/jmmerino/miniTip",
+  "authors": [
+    "James Simpson"
+  ],
+  "description": "Ultra lightweight jQuery tooltip plugin",
+  "main": "src/jquery.miniTip.js",
+  "keywords": [
+    "jquery",
+    "minitip",
+    "tooltip"
+  ],
+  "license": "MIT and GPL"
+}
