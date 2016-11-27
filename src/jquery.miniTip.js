@@ -284,7 +284,7 @@
 					}
 					
 					// position the arrow
-					tt_a.css({'margin-left': (aLeft > 0 ? aLeft : aLeft + parseInt(o.stemOff, 10) / 2) + 'px', 'margin-top': aTop + 'px'}).attr('class', elPos);
+					tt_a.css({'margin-left': (aLeft > 0 ? aLeft-2 : aLeft + parseInt(o.stemOff, 10) / 2) + 'px', 'margin-top': aTop+2 + 'px'}).attr('class', elPos);
 					
 					// clear delay timer if exists
 					if (delay) clearTimeout(delay);
