@@ -1,4 +1,4 @@
-jQuery miniTip Plugin (v1.5.3)
+jQuery miniTip Plugin (v1.6.0)
 ---------------------
 
 License
@@ -32,6 +32,12 @@ Description
 * Tested in: IE7+, Firefox 3.5+, Safari 3+, Chrome, Opera 10+
 * More features can be found at the [miniTip](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin) home page
 
+### Installation ###
+
+You can either download it from the `dist` directory, or install it via NPM
+
+  npm i --save minitip
+
 ### Documentation ###
 
 Please go to the [miniTip](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin) home page to view the full documentation (it is really straightforward, I promise!).
@@ -60,6 +66,14 @@ This is a more advanced example utilizing all available options (as of v1.0). Th
       hide: funciton(){ alert('World!'); },
       class: "custom-class"
     });
+
+You can also pass options per element using the element's attributes:
+
+```html
+
+  <div data-minitip-class='my-custom-class' data-minitip-maxW='500'>hover me</div>
+
+```
 
 More examples and live demos can be found at [http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin)
 
