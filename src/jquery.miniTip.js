@@ -28,7 +28,8 @@
 			maxW:		'250px', // max width of tooltip
 			offset:		5, // offset in pixels of stem from anchor
 			stemOff: 	0, // x-axis offset of stem, set to value of border-radius to adjust for viewport correction
-			doHide:		false  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			doHide:		false,  // call $('#id').miniTip({hide: true}); to manually hide the tooltip
+			class: 		false, 
 		},
 		
 			// merge the defaults with the user declared options
@@ -277,7 +278,10 @@
 					
 					// position the tooltip and show it
 					delay = setTimeout(function(){ tt_w.css({"margin-left": mLeft+"px", "margin-top": mTop + 'px'}).stop(true,true).fadeIn(o.fadeIn); }, o.delay);
-				}
+
+					// add custom class
+					$("#miniTip").attr("class",o.class||"");
+				};
 		
 				// hide the tooltip
 				var hide = function() {
