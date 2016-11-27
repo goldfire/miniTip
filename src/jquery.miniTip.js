@@ -56,6 +56,21 @@
 			// make sure the anchor element can be referred to below
 			var el = $(this);
 		
+			// get options per element by "data-minitip" attributes
+			o.title 	= el.attr("data-minitip-title") 	|| o.title;
+			o.content 	= el.attr("data-minitip-content") 	|| o.content;
+			o.delay 	= el.attr("data-minitip-delay")*1 	|| o.delay;
+			o.anchor 	= el.attr("data-minitip-anchor") 	|| o.anchor;
+			o.event 	= el.attr("data-minitip-event") 	|| o.event;
+			o.fadeIn 	= el.attr("data-minitip-fadeIn")*1 	|| o.fadeIn;
+			o.fadeOut 	= el.attr("data-minitip-fadeOut")*1 || o.fadeOut;
+			o.aHide 	= el.attr("data-minitip-aHide") 	|| o.aHide;
+			o.maxW 		= el.attr("data-minitip-maxW") 		|| o.maxW;
+			o.offset 	= el.attr("data-minitip-offset")*1 	|| o.offset;
+			o.stemOff 	= el.attr("data-minitip-stemOff")*1 || o.stemOff;
+			o.doHide 	= el.attr("data-minitip-doHide") 	|| o.doHide;
+			o.class 	= el.attr("data-minitip-class") 	|| o.class;
+
 			// if content is set to false, use the title attribute
 			var cont = o.content ? o.content : el.attr('title');
 			
