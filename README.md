@@ -57,7 +57,8 @@ This is a more advanced example utilizing all available options (as of v1.0). Th
       offset: 15,
       stemOff: 0,
       show: function(){ alert('Hello,'); },
-      hide: funciton(){ alert('World!'); }
+      hide: funciton(){ alert('World!'); },
+      class: "custom-class"
     });
 
 More examples and live demos can be found at [http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin](http://goldfirestudios.com/blog/81/miniTip-jQuery-Plugin)
