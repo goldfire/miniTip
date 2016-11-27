@@ -1,10 +1,8 @@
 /*!
- * miniTip v1.5.3
- *
- * Updated: July 15, 2012
+ * MiniTip
  * Requires: jQuery v1.3+
  *
- * (c) 2011, James Simpson
+ * (c) 2016, James Simpson
  * http://goldfirestudios.com
  *
  * Dual licensed under the MIT and GPL
