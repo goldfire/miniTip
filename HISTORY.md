@@ -1,3 +1,7 @@
+### Version 1.6.0 (November 28, 2016) ###
+* Added ability to add custom classes
+* Ability to set options per element via "data-minitip-<option>" attribute
+
 ### Version 1.5.3 (July 15, 2012) ###
 * Added 'stemOff' option to correct stem positioning when a large browser-radius is used (cross browser solution, thanks Jason Day).
 * Correctly unbind HTML click event on miniTip hide.
